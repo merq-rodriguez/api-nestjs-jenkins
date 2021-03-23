@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres:10
+    container_name: postgresql_app
+    ports:
+      - 5432:5432
+    environment: 
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=user_nestjs
+      - POSTGRES_DB=users
