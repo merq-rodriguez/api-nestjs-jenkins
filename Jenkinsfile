@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        tools {nodejs "nodejs"}
+        nodejs "nodejs"
     }
     environment {
         PROJECT_ROOT = "dist/"
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage("checkout"){
             steps {
-                git 'http://github'
+                git 'https://github.com/merq-rodriguez/api-nestjs-jenkins'
             }
         }
         stage("build"){
@@ -25,6 +25,7 @@ pipeline {
             sh "npm run test"
           }
         }
+
         stage("scan"){
             environment {
                 scannerHome = tool 'sonar-scanner'
