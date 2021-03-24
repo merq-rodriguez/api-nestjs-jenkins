@@ -34,7 +34,6 @@ pipeline {
                     withSonarQubeEnv('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.language=ts \
-                        -Dsonar.webhooks.project=http://jenkins:8080/sonarqube-webhook \
                         -Dsonar.projectKey=nestjs-api:Test \
                         -Dsonar.projectName=nestjs-api \
                         -Dsonar.projectVersion=0.1 \
