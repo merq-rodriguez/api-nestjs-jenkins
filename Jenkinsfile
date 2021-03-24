@@ -44,7 +44,7 @@ pipeline {
                         -Dsonar.tests=src \
                         -Dsonar.test.inclusions=**/*.spec.ts"
                     }
-                    timeout(time: 5, unit: 'MINUTES') {
+                    timeout(time: 3, unit: 'MINUTES') {
                         //Sirve para detener la ejecucion si no es Success
                         waitForQualityGate abortPipeline: qualityGateValidation(waitForQualityGate())
                     }
