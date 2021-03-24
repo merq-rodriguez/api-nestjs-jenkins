@@ -43,7 +43,7 @@ pipeline {
                         -Dsonar.exclusions=**/node_modules/** \
                         -Dsonar.tests=src \
                         -Dsonar.test.inclusions=**/*.spec.ts \
-                        -Donar.javascript.lcov.reportPaths=coverage \
+                        -Donar.typescript.lcov.reportPaths=coverage \
                         -Dsonar.testExecutionReportPaths=coverage/clover.xml"
                     }
                     timeout(time: 3, unit: 'MINUTES') {
