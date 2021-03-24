@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres:10
+    container_name: postgres_lab
+    ports:
+      - 5432:5432
+    networks:
+      - net-devops
+
+  jenkins:
+    image: jenkins-docker
+    container_name: jenkins-lab
+    build:
+      context: .
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - $PWD/vol/jenkins_home:/var/jenkins_home
+      #- /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net-devops
+
+  sonarqube:
+    image: sonarqube
+    container_name: sonarqube-lab
+    ports:
+      - 9000:9000
+      - 9092:9092
+    environment:
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
+    networks:
+      - net-devops
+
+networks:
+  net-devops:
+    driver: bridge
