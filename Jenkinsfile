@@ -43,8 +43,21 @@ pipeline {
                         -Dsonar.test.inclusions=**/*.spec.ts"
                     }
                     timeout(time: 10, unit: 'MINUTES') {
+                        maxRetry = 200
+                        forloop (i=0; i<maxRetry; i++){
+                            try {
+                                timeout(time: 10, unit: 'SECONDS') {
+                                    //waitForQualityGate()
+                                    waitForQualityGate abortPipeline: qualityGateValidation(waitForQualityGate())
+                                }
+                            } catch(Exception e) {
+                                if (i == maxRetry-1) {
+                                    throw e
+                                }
+                            }
+                        }
                         //Sirve para detener la ejecucion si no es Success
-                        waitForQualityGate abortPipeline: qualityGateValidation(waitForQualityGate())
+                        //waitForQualityGate abortPipeline: qualityGateValidation(waitForQualityGate())
                     }
             }
         }
