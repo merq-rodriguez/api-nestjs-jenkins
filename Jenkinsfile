@@ -23,6 +23,7 @@ pipeline {
         stage("test"){
           steps{
             sh "npm run test"
+            sh "npm run test:cov"
           }
         }
 
@@ -41,7 +42,9 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8 \
                         -Dsonar.exclusions=**/node_modules/** \
                         -Dsonar.tests=src \
-                        -Dsonar.test.inclusions=**/*.spec.ts"
+                        -Dsonar.test.inclusions=**/*.spec.ts \
+                        -Donar.javascript.lcov.reportPaths=coverage \
+                        -Dsonar.testExecutionReportPaths=coverage/clover.xml"
                     }
                     timeout(time: 3, unit: 'MINUTES') {
                         //Sirve para detener la ejecucion si no es Success
