@@ -31,7 +31,6 @@ pipeline {
                 scannerHome = tool 'sonar-scanner'
             }
              steps {
-                    //sh 'mvn clean install sonar:sonar'
                     withSonarQubeEnv('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=nestjs-api:Test \
@@ -39,14 +38,9 @@ pipeline {
                         -Dsonar.projectVersion=0.1 \
                         -Dsonar.sources=src \
                         -Dsonar.sourceEncoding=UTF-8 \
-                        -Dsonar.sources=src \
                         -Dsonar.exclusions=**/node_modules/** \
                         -Dsonar.tests=src \
-                        -Dsonar.test.inclusions=**/*.spec.ts \
-                        -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
-                        -Dsonar.java.binaries=./${PROJECT_ROOT}target/" 
-                        //sh "mvn -f practica-devops/ sonar:sonar"
-                        
+                        -Dsonar.test.inclusions=**/*.spec.ts"
                     }
                     timeout(time: 10, unit: 'MINUTES') {
                         //Sirve para detener la ejecucion si no es Success
