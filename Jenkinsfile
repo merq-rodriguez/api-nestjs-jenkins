@@ -33,6 +33,7 @@ pipeline {
              steps {
                     withSonarQubeEnv('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.webhooks.project=http://jenkins:8080/sonarqube-webhook \
                         -Dsonar.projectKey=nestjs-api:Test \
                         -Dsonar.projectName=nestjs-api \
                         -Dsonar.projectVersion=0.1 \
@@ -42,7 +43,7 @@ pipeline {
                         -Dsonar.tests=src \
                         -Dsonar.test.inclusions=**/*.spec.ts"
                     }
-                    timeout(time: 10, unit: 'MINUTES') {
+                    timeout(time: 5, unit: 'MINUTES') {
                         //Sirve para detener la ejecucion si no es Success
                         waitForQualityGate abortPipeline: qualityGateValidation(waitForQualityGate())
                     }
