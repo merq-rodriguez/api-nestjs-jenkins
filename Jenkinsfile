@@ -41,7 +41,7 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8 \
                         -Dsonar.exclusions=**/node_modules/** \
                         -Dsonar.tests=src \
-                        -Dsonar.test.inclusions=**/*.spec.ts \
+                        -Dsonar.test.inclusions=**/*.spec.ts"
                     }
                     timeout(time: 3, unit: 'MINUTES') {
                         //Sirve para detener la ejecucion si no es Success
