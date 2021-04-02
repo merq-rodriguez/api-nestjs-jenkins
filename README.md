@@ -34,9 +34,16 @@ $ npm install
 
 ## Docker
 ```
-  docker build -t app-name .
+  docker build -t api-nestjs .
 ```
 
+```
+  docker run -it -p 4000:4000 api-nestjs:latest /bin/ash
+```
+
+```
+  docker exec -it api-nestjs:latest /bin/ash
+```
 ## Running the app
 
 ```bash
